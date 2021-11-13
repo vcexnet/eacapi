@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/js/jquery.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/echarts.min.js" type="text/javascript"></script>
+    <script src="/js/index.js" type="text/javascript"></script>
+    <style>
+        .bgbt {
+            background: #F4F5F8;
+            color: #9EADCE;
+            line-height: 1.5vw;
+            font-size: 0.7vw;
+        }
+
+        .bgnr {
+            text-align: center;
+            line-height: 2vw;
+            font-size: 0.7vw;
+        }
+
+        .lan {
+            color: #5697F7;
+        }
+
+        tr {
+            border-bottom: 1px solid #E1E5EC;
+            border-left: 1px solid #E1E5EC;
+            border-right: 1px solid #E1E5EC;
+        }
+
+        .headDiv {
+            background: #213654;
+            width: 100vw;
+            height: 10vw;
+
+        }
+
+        .eactalk {
+            width: 184px;
+            height: 22px;
+            font-size: 1.8vw;
+            font-family: YouSheBiaoTiHei;
+            font-weight: 400;
+            color: #FFFFFF;
+
+        }
+
+        .QRBG {
+            width: 6vw;
+            height: 6vw;
+            background: #FFFFFF;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .saoma {
+            font-size: 1.5vw;
+            font-family: Source Han Sans CN;
+            font-weight: bold;
+            color: #1E71EE;
+            margin-top: -2px;
+            display: inline-block;
+        }
+
+        .xiazai {
+            font-size: 1vw;
+            color: #FFFFFF;
+            padding-top: 1vw;
+
+        }
+
+        .cishu {
+            height: 59px;
+            font-size: 0.8vw;
+            color: #FFFFFF;
+            padding-top: 1.5vw;
+        }
+    </style>
+</head>
+<body style="background: #efeff4;">
+<!-- 首页 -->
+<div id="shouye">
+    <!-- 最新爆块开始 -->
+    <div style="padding-top: 2vw;padding-left: 12.5vw;">
+        <div style="width: 75vw;background-color: #FFFFFF;">
+            <div style="padding: 0.5vw 0 0.5vw 1vw;border: 1px solid #E1E5EC;">
+                <span style="font-size: 0.8vw;color: #001A56;font-weight: bold;">区块链信息</span>
+            </div>
+            <div style="">
+                <table style="width: 75vw;border-collapse :collapse;">
+                    <tr class="bgbt">
+                        <th>键</th>
+                        <th>值</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            difficulty
+                        </td>
+                        <td th:text="${getInfoPojo.difficulty}"></td>
+                    </tr>
+                    <tr>
+                        <td>headers</td>
+                        <td th:text="${getInfoPojo.headers}"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            chain
+                        </td>
+                        <td th:text="${getInfoPojo.chain}"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            chainwork
+                        </td>
+                        <td th:text="${getInfoPojo.chainwork}"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            size_on_disk
+                        </td>
+                        <td th:text="${getInfoPojo.size_on_disk}"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            mediantime
+                        </td>
+                        <td th:text="${getInfoPojo.mediantime}"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            blocks
+                        </td>
+                        <td th:text="${getInfoPojo.blocks}"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            pruned
+                        </td>
+                        <td th:text="${getInfoPojo.pruned}"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            warnings
+                        </td>
+                        <td th:text="${getInfoPojo.warnings}"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            bestblockhash
+                        </td>
+                        <td th:text="${getInfoPojo.bestblockhash}"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            initialblockdownload
+                        </td>
+                        <td th:text="${getInfoPojo.initialblockdownload}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div style="padding-top: 2vw;padding-left: 12.5vw;">
+        <div style="width: 75vw;background-color: #FFFFFF;">
+            <div style="padding: 0.5vw 0 0.5vw 1vw;border: 1px solid #E1E5EC;">
+                <span style="font-size: 0.8vw;color: #001A56;font-weight: bold;">区块链节点信息</span>
+            </div>
+            <div style="">
+                <table style="width: 75vw;border-collapse :collapse;">
+                    <tr class="bgbt">
+                        <th>synced_headers</th>
+                        <th>banscore</th>
+                        <th>inbound</th>
+                        <th>bytesrecv</th>
+                        <th>lastsend</th>
+                    </tr>
+                    <tr th:each="peer:${page.records}">
+                        <td th:text="${peer.synced_headers}"></td>
+                        <td th:text="${peer.banscore}"></td>
+                        <td th:text="${peer.inbound}"></td>
+                        <td th:text="${peer.bytesrecv}"></td>
+                        <td th:text="${peer.lastsend}"></td>
+                    </tr>
+                </table>
+                <ul class="pagination pull-right no-margin">
+                    <!-- 首页 -->
+                    <li>
+                        <a th:href="'/?pageNum=1'">首页</a>
+                    </li>
+                    <!-- 上一页 -->
+                    <li th:if="${(page.pageNum)-1>0}">
+                        <a th:href="'/?pageNum='+${(page.pageNum)-1}" th:text="上一页"></a>
+                    </li>
+                    <!-- 中间页 -->
+                    <li th:each="index:${#numbers.sequence(1, page.totalPage)}">
+                        <a th:href="'/?pageNum='+${index}" th:text="${index}"
+                           th:if="${index ne page.pageNum}"></a>
+                        <a th:href="'/?pageNum='+${index}" th:text="${index}"
+                           th:if="${index eq page.pageNum}"
+                           th:style="'font-weight:bold;background: #6faed9;'"></a>
+                    </li>
+                    <!-- 下一页 -->
+                    <li th:if="${(page.pageNum+1)<=page.totalPage}">
+                        <a th:href="'/?pageNum='+${page.pageNum+1}" th:text="下一页"></a>
+                    </li>
+                    <!-- 尾页 -->
+                    <li>
+                        <a th:href="'/?pageNum='+${page.totalPage}">尾页</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+</script>
+</html>
